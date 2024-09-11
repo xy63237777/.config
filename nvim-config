@@ -720,8 +720,8 @@ nmap <silent> gr <Plug>(coc-references)
 " 重命名当前变量
 nmap <leader>rn <Plug>(coc-rename)
 
-"nmap tt :CocCommand explorer<CR>
-nmap tt :NERDTreeToggle<CR>
+nmap tt :CocCommand explorer<CR>
+"nmap tt :NERDTreeToggle<CR>
 
 
 " coc-translator
