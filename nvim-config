@@ -450,6 +450,7 @@ Plug 'cohama/agit.vim'
 " Autoformat
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 " Tex
 " Plug 'lervag/vimtex'
@@ -635,6 +636,8 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 let g:coc_global_extensions = [
 	\ 'coc-css',
+	\ 'coc-snippets',
+	\ 'coc-actions',
 	\ 'coc-diagnostic',
 	\ 'coc-docker',
 	\ 'coc-eslint',
@@ -671,6 +674,11 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -715,7 +723,7 @@ nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 " 后面的这几个基本都是跳转到可以试试
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " 重命名当前变量
 nmap <leader>rn <Plug>(coc-rename)
@@ -1026,7 +1034,7 @@ let g:go_doc_popup_window = 1
 let g:go_def_mapping_enabled = 0
 let g:go_template_autocreate = 0
 let g:go_textobj_enabled = 0
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 let g:go_def_mapping_enabled = 0
 let g:go_highlight_array_whitespace_error = 1
 let g:go_highlight_build_constraints = 1
@@ -1049,7 +1057,6 @@ let g:go_highlight_variable_assignments = 0
 let g:go_highlight_variable_declarations = 0
 let g:go_doc_keywordprg_enabled = 0
 
-
 " ===
 " === AutoFormat
 " ===
@@ -1060,7 +1067,7 @@ augroup autoformat_settings
 	" autocmd FileType go AutoFormatBuffer gofmt
 	" autocmd FileType gn AutoFormatBuffer gn
 	" autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-	autocmd FileType java AutoFormatBuffer google-java-format
+	" autocmd FileType java AutoFormatBuffer google-java-format
 	" autocmd FileType python AutoFormatBuffer yapf
 	" Alternative: autocmd FileType python AutoFormatBuffer autopep8
 	" autocmd FileType rust AutoFormatBuffer rustfmt
@@ -1387,6 +1394,8 @@ let g:agit_no_default_mappings = 1
 "
 
 map <c-=> <leader>c<space> 
+noremap <c-Enter> :CocAction<CR>
+
 
 " ===
 " === Necessary Commands to Execute
