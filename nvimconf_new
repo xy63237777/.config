@@ -37,9 +37,9 @@ set number
 set relativenumber
 set cursorline
 set noexpandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set autoindent
 set list
 set listchars=tab:\|\ ,trail:▫
@@ -146,9 +146,11 @@ noremap h e
 "source $HOME/.config/nvim/cursor.vim
 " If you use Qwerty keyboard, uncomment the next line.
 " source $HOME/nvim/cursor_for_qwerty.vim
-
-
+"
+noremap <C-[> 10j
+noremap <C-]> 10k
 " ==================== Insert Mode Cursor Movement ====================
+"
 inoremap <C-a> <ESC>A
 
 
@@ -350,6 +352,10 @@ Plug 'kdheepak/lazygit.nvim'
 
 " Tex
 " Plug 'lervag/vimtex'
+"
+"注释
+"
+Plug 'preservim/nerdcommenter'
 
 " CSharp
 Plug 'OmniSharp/omnisharp-vim'
@@ -497,6 +503,7 @@ let g:airline_powerline_fonts = 0
 " ==================== coc.nvim ====================
 let g:coc_global_extensions = [
 	\ 'coc-css',
+	\ 'coc-actions',
 	\ 'coc-diagnostic',
 	\ 'coc-docker',
 	\ 'coc-eslint',
@@ -573,7 +580,7 @@ nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD :tab sp<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nmap tt :CocCommand explorer<CR>
@@ -1207,6 +1214,8 @@ let g:terminal_color_12 = '#CAA9FA'
 let g:terminal_color_13 = '#FF92D0'
 let g:terminal_color_14 = '#9AEDFE'
 
+
+map <c-=> <leader>c<space>
 
 " ==================== joshuto.nvim ====================
 noremap <silent> R :Joshuto<CR>
